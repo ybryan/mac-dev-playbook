@@ -1,14 +1,15 @@
 # Mac Development Ansible Playbook
 
-[![Build Status](https://travis-ci.org/geerlingguy/mac-dev-playbook.svg?branch=master)](https://travis-ci.org/geerlingguy/mac-dev-playbook)
+>[![Build Status](https://travis-ci.org/geerlingguy/mac-dev-playbook.svg?branch=master)](https://travis-ci.org/geerlingguy/mac-dev-playbook)
 
-This playbook installs and configures most of the software I use on my Mac for web and software development. Some things in macOS are slightly difficult to automate, so I still have some manual installation steps, but at least it's all documented here.
+This playbook installs and configures most of the software I use on my Mac for statistical analysis and software development. Some things in macOS are slightly difficult to automate, so I still have some manual installation steps, but at least it's all documented here.
 
 This is a work in progress, and is mostly a means for me to document my current Mac's setup. I'll be evolving this set of playbooks over time.
 
 *See also*:
 
   - [Boxen](https://github.com/boxen)
+  - [geerlingguy](https://github.com/geerlingguy/mac-dev-playbook)
   - [Battleschool](http://spencer.gibb.us/blog/2014/02/03/introducing-battleschool)
   - [osxc](https://github.com/osxc)
   - [MWGriffin/ansible-playbooks](https://github.com/MWGriffin/ansible-playbooks) (the original inspiration for this project)
@@ -19,9 +20,10 @@ This is a work in progress, and is mostly a means for me to document my current 
       1. Ensure Apple's command line tools are installed (`xcode-select --install` to launch the installer).
         * [Install homebrew] (`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`)
         * [Install Ansible] (`brew install ansible`)
-      2. Clone this repository to your local drive.
-  1. Run `$ ansible-galaxy install -r requirements.yml` inside this directory to install required Ansible roles.
-  2. Run `ansible-playbook main.yml -i inventory -K` inside this directory. Enter your account password when prompted.
+        * [Install git] (`brew install git`)
+  1. Clone this repository to your local drive. (`curl https://github.com/geerlingguy/mac-dev-playbook/archive/master.zip`)
+  2. Run `$ ansible-galaxy install -r requirements.yml` inside this directory to install required Ansible roles.
+  3. Run `ansible-playbook main.yml -i inventory -K` inside this directory. Enter your account password when prompted.
 
 > Note: If some Homebrew commands fail, you might need to agree to Xcode's license or fix some other Brew issue. Run `brew doctor` to see if this is the case.
 
@@ -44,8 +46,6 @@ You can override any of the defaults configured in `default.config.yml` by creat
     
     mas_installed_apps:
       - { id: 443987910, name: "1Password" }
-      - { id: 498486288, name: "Quick Resizer" }
-      - { id: 557168941, name: "Tweetbot" }
       - { id: 497799835, name: "Xcode" }
     
     gem_packages:
@@ -102,14 +102,19 @@ Finally, there are a few other preferences and settings added on for various app
 
 It's my hope that I can get the rest of these things wrapped up into Ansible playbooks soon, but for now, these steps need to be completed manually (assuming you already have Xcode and Ansible installed, and have run this playbook).
 
-  1. Set JJG-Term as the default Terminal theme (it's installed, but not set as default automatically).
-  2. Install all the apps that aren't yet in this setup (see below).
-  3. Set trackpad tracking rate.
-  4. Set mouse tracking rate.
-  5. Configure extra Mail and/or Calendar accounts (e.g. Google, Exchange, etc.).
-  6. Install pipsi
+  1. Install all the apps that aren't yet in this setup (see below).
+  2. Set trackpad tracking rate.
+  3. Set mouse tracking rate.
+  4. Configure extra Mail and/or Calendar accounts (e.g. Google, Exchange, etc.).
+  5. Install pipsi
     * Set `pyenv shell system`
     * (`curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python`)
+  6. Install jupyter-core
+
+    ```
+    pipsi install jupyter-core
+    ~/.local/venvs/jupyter-core/bin/pip install jupyter
+    ```
 
 ### Applications/packages to be added:
 
@@ -127,11 +132,11 @@ These are mostly direct download links, some are more difficult to install becau
     ```
     ```
 
-## Testing the Playbook
+>## Testing the Playbook
 
-Many people have asked me if I often wipe my entire workstation and start from scratch just to test changes to the playbook. Nope! Instead, I posted instructions for how I build a [Mac OS X VirtualBox VM](https://github.com/geerlingguy/mac-osx-virtualbox-vm), on which I can continually run and re-run this playbook to test changes and make sure things work correctly.
+>Many people have asked me if I often wipe my entire workstation and start from scratch just to test changes to the playbook. Nope! Instead, I posted instructions for how I build a [Mac OS X VirtualBox VM](https://github.com/geerlingguy/mac-osx-virtualbox-vm), on which I can continually run and re-run this playbook to test changes and make sure things work correctly.
 
-Additionally, this project is [continuously tested on Travis CI's macOS infrastructure](https://travis-ci.org/geerlingguy/mac-dev-playbook).
+>Additionally, this project is [continuously tested on Travis CI's macOS infrastructure](https://travis-ci.org/geerlingguy/mac-dev-playbook).
 
 ## Ansible for DevOps
 
@@ -139,4 +144,4 @@ Check out [Ansible for DevOps](https://www.ansiblefordevops.com/), which teaches
 
 ## Author
 
-[Jeff Geerling](https://www.jeffgeerling.com/), 2014 (originally inspired by [MWGriffin/ansible-playbooks](https://github.com/MWGriffin/ansible-playbooks)).
+[Bryan Yu](ybryan@gmail.com), forked from [Jeff Geerling](https://www.jeffgeerling.com/)

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+
+# Original author: Nathan Toups https://n.2p5.xyz/
 set -o pipefail
 set -e
 
@@ -7,6 +9,7 @@ CLI_TOOLS_PATH="/Library/Developer/CommandLineTools"
 BREW_PATH="/usr/local/bin/brew"
 BREW_DL="https://raw.githubusercontent.com/Homebrew/install/master/install"
 ANSIBLE_PATH="/usr/local/bin/ansible"
+GIT_PATH="/usr/local/bin/git"
 
 # check/install xcode-cli
 # note: this users clever hack that leverages an in-progress file
@@ -38,4 +41,13 @@ if [ ! -f $ANSIBLE_PATH ]; then
 	brew install ansible
 else
 	echo "SKIPPING   - ansible is already installed"
+fi
+
+# check/install git
+echo "CHECKING   - git"
+if [ ! -f $GIT_PATH ]; then
+	echo "INSTALLING - git"
+	brew install git 
+else
+	echo "SKIPPING   - git is already installed"
 fi

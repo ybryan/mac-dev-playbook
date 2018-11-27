@@ -19,7 +19,7 @@ dotfiles_files:
   - .vimrc
 
 homebrew_installed_packages:
-  # - ansible # Installed via Pip.
+  - ansible 
   - autoconf
   - awscli
   - flake8
@@ -77,7 +77,6 @@ homebrew_cask_apps:
   - firefox
   - font-source-code-pro
   - google-chrome
-  - gotomeeting
   - iterm2
   - java
   - java8
@@ -119,7 +118,9 @@ npm_packages: []
   # - name: webpack
   #   state: present # present/absent/latest, default: present
   #   version: "^2.6" # default: N/A
-pip_packages: []
+
+# Don't use this. System pip will get polluted
+pip_packages: []  
   # - name: mkdocs
   #   state: present # present/absent/latest, default: present
   #   version: "0.16.3" # default: N/A

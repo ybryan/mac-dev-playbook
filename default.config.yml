@@ -2,7 +2,7 @@
 downloads: ~/.ansible-downloads/
 
 configure_dotfiles: no
-configure_sudoers: no
+configure_sudoers: yes
 configure_terminal: no
 configure_osx: no
 

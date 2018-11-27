@@ -21,7 +21,7 @@ This is a work in progress, and is mostly a means for me to document my current 
         * [Install homebrew] (`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`)
         * [Install Ansible] (`brew install ansible`)
         * [Install git] (`brew install git`)
-  1. Clone this repository to your local drive. (`curl https://github.com/geerlingguy/mac-dev-playbook/archive/master.zip`)
+  1. Clone this repository to your local drive. (`curl https://github.com/ybryan/mac-dev-playbook/archive/master.zip`)
   2. Run `$ ansible-galaxy install -r requirements.yml` inside this directory to install required Ansible roles.
   3. Run `ansible-playbook main.yml -i inventory -K` inside this directory. Enter your account password when prompted.
 
